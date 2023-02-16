@@ -1,2 +1,2 @@
 # DataBase
-Exercitado Node e sequelize!
+Exercitando Node e sequelize!
