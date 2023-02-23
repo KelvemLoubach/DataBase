@@ -32,28 +32,35 @@ export const idadeAction = (req: Request, res: Response) => {
     });
 };
 
+
+
  export const addAge = async (req:Request, res:Response)=>{
     let id = req.params.id
   
    
-    let userDataBase = await user.findAll({where:{id}});
-    let userData = userDataBase[0];
+    let userData = await user.findOne({
+        where: {id}
+    })
+    if(userData){
     userData.age++;
-
     await userData.save();
-   
+    }
+
     res.redirect('/')
  }
 
  export const lowerAge = async (req:Request, res:Response)=>{
     let id = req.params.id
   
-    let userDataBase = await user.findAll({where:{id}});
-    let userData = userDataBase[0];
+    let userData = await user.findOne({
+        where:{id}
+    })
+
+    if(userData){
     userData.age--;
-    
     await userData.save();
-   
+    }
+    
     console.log(  userData);
 
     res.redirect('/')
@@ -62,24 +69,31 @@ export const idadeAction = (req: Request, res: Response) => {
  export const exclude = async (req:Request, res:Response)=>{
     let id = req.params.id
   
-   
-    let userDataBase = await user.findAll({where:{id}});
-    let userData = userDataBase[0];
+    let userData= await user.findOne({
+        where: {id},
+    });
+
+    if(userData){
+        userData.destroy();
+    }else{
+        console.log('Usuário não encontrado!')
+    };
    
     res.redirect('/')
 
-    userData.destroy();
  }
 
  export const newUser = async (req:Request, res:Response)=>{
-    let {name, age} = req.body
+    let {name, age} = req.body;
     
+    console.log( name)
+    let nameLower = name.toUpperCase();
+    console.log(nameLower);
+
     await user.create({
-        name,
+        name: nameLower,
         age
     })
-
-    console.log(name, age);
 
     res.redirect('/')
  }

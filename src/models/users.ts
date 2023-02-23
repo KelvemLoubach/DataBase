@@ -12,6 +12,7 @@ export interface userInstance extends Model {
     
     id: {
         primaryKey: true,
+        autoIncrement: true,
         type: DataTypes.INTEGER
     },
 
