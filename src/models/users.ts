@@ -17,7 +17,10 @@ export interface userInstance extends Model {
     },
 
     name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        get () {
+            return this.getDataValue('name').toUpperCase();
+        }
     },
 
     age: {

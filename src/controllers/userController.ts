@@ -86,12 +86,8 @@ export const idadeAction = (req: Request, res: Response) => {
  export const newUser = async (req:Request, res:Response)=>{
     let {name, age} = req.body;
     
-    console.log( name)
-    let nameLower = name.toUpperCase();
-    console.log(nameLower);
-
     await user.create({
-        name: nameLower,
+        name,
         age
     })
 
